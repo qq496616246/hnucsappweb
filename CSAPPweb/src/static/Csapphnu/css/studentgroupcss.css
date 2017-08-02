@@ -1,0 +1,176 @@
+body{
+	font-family:'Microsoft Yahei';
+    background-image:url(../images/body-bg.png);
+}
+*{
+    -webkit-touch-callout:none;  /*系统默认菜单被禁用*/
+    -webkit-user-select:none; /*webkit浏览器*/
+    -khtml-user-select:none; /*早期浏览器*/
+    -moz-user-select:none;/*火狐*/
+    -ms-user-select:none; /*IE10*/
+    user-select:none;
+}
+/*
+巨幕的css
+ */
+.jumbotron {
+    background: url(/static/Csapphnu/images/backgroud.jpg) center center no-repeat;
+    padding: 24px 0;
+    margin-bottom: 0px;
+}
+.botronshow h3{
+    margin: 0px;
+    color: white;
+}
+@media screen and (min-width: 768px){
+    .jumbotron h3 {
+        font-size: 20px;
+    }
+    .jumbotron .p{
+        font-size: 10px;
+    }
+}
+
+/*
+切换班级中的超链的Css
+ */
+.changeClass-ul li a{
+    font-size: 21px;
+}
+
+.common_title {
+     height: 40px;
+     background-color: #ff722b;
+}
+.common_title h3{
+    height: 40px;
+    padding: 0px;
+    margin: 0px 0px 0px  -30px;
+    font-size: 20px;
+    color: #fff;
+    line-height: 40px;
+    text-indent: 20px;
+}
+
+.studentheader-title{
+    margin-top: 15px;
+}
+/*
+   历史分组的标题的CSS
+ */
+.grounp-history , .grounp-current{
+    margin-top: 6px;
+}
+/*
+功能选择区的css
+ */
+.input-groupnumber{
+    min-width: 80px;
+}
+.selectnumbet{
+    margin-top: 5px;
+}
+
+/*
+学生名字的CSS
+ */
+
+body  ul{
+    margin:0px;
+    padding:0px;
+}
+
+.student-grounp-detail li{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+.student-grounp-detail li ul li{
+    list-style: none;
+}
+
+#studentbtn{
+    margin-top: 5px;
+}
+
+/*
+小组详情中对应的小组信息的CSS
+ */
+.student-grounp-detail {
+    width: 245px;
+    margin: 10px auto ;
+}
+
+.student-grounp-detail li ul input{
+    width: 70%;
+}
+.student-grounp-detail li ul button{
+    width: 30%;
+}
+
+.student-grounp-detail .grounp1 {
+    display: block;
+    width: 245px;
+    height: 30px;
+    line-height: 30px;
+    text-decoration: none;
+    background-color: #3366cc;
+    color: #fff;
+    font-size: 16px;
+    text-indent: 10px;
+}
+
+.student-grounp-detail .grounp1 {
+    border-bottom: 1px solid #afc6f6;
+
+}
+
+.student-grounp-detail li ul li input {
+    font-size: 14px;
+    text-indent: 20px;
+    background-color: #7aa1ef;
+
+}
+
+.student-grounp-detail li ul li {
+    border-bottom: 1px solid #afc6f6;
+}
+
+.student-grounp-detail li ul {
+    display: none;
+}
+
+.student-grounp-detail li ul.current {
+    display: block;
+}
+
+.student-grounp-detail li ul li input:hover {
+    background-color: #f6b544;
+}
+
+/*
+历史分组的CSS
+ */
+.studentgrounp-table-tr th{
+    text-align: center;
+}
+
+/*
+返回按钮
+ */
+.go-home {
+    color: #3d3e42;
+    background-image: url(../images/home-button.png);
+    background-size: 36px 36px;
+    background-position: 8px 0px;
+    background-repeat: no-repeat;
+    position: absolute;
+    right: 60px;
+    top: 0px;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    padding-top: 40px;
+    font-family: 'Dosis', sans-serif;
+    font-size: 20px;
+}

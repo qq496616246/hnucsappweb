@@ -1,0 +1,111 @@
+/*
+点击按钮进行变换的CSS
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-size: 12px;
+}
+#accordion {
+    width: 327px;
+    height: 200px;
+    margin: 100px auto 0 auto;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #CCC;
+}
+#accordion ul {
+    list-style: none;
+}
+#accordion ul li {
+    width: 643px;
+    height: 200px;
+    position: absolute;
+    background: #FFF;
+}
+#accordion ul li span {
+    display: block;
+    width: 20px;
+    height: 200px;
+    float: left;
+    text-align: center;
+    color: #FFF;
+    padding-top: 5px;
+    cursor: pointer;
+}
+#accordion ul li img {
+    display: block;
+    float: right;
+}
+.bar01 {
+    left: 0px;
+}
+.bar02 {
+    left: 275px;
+}
+.bar03 {
+    left: 305px;
+}
+.bar01 span {
+    background: #09E0B5;
+}
+.bar02 span {
+    background: #3D7FBB;
+}
+.bar03 span {
+    background: #5CA716;
+}
+*/
+/*
+ 功能模块的CSS
+ */
+body {
+    font-family: 'Microsoft Yahei';
+    font-size: 22px;
+    color: #666;
+}
+.slide {
+    max-width: 460px;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+}
+.slide .slide_pics {
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 460px;
+    height: 200px;
+}
+.slide .slide_pics li {
+    width: 460px;
+    height: 200px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    list-style: none;
+}
+.points {
+    width: 100%;
+    height: 11px;
+    position: absolute;
+    left: 0;
+    top: 180px;
+    text-align: center;
+}
+.points li {
+    display: inline-block;
+    width: 11px;
+    height:11px;
+    margin: 0 5px;
+    background-color: #9f9f9f;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.points li.active {
+    background-color: #cecece
+}
+
+
+

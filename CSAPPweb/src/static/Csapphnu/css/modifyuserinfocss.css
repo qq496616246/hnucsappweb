@@ -1,0 +1,16 @@
+body {
+    font-family: 微软雅黑;
+}
+
+.right-span{
+    height: 30px;
+    line-height: 30px;
+    margin-left: 0px;
+    color: #00ff00;
+}
+.error-span{
+    height: 30px;
+    line-height: 30px;
+    margin-left: 0px;
+    color: #e62e2e;
+}

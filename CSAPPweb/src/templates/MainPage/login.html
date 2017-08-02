@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="device-width, user-scalable=no,
+	initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link href="/static/MainPage/styles/style_log.css" rel="stylesheet" type="text/css">
+	<script src="/static/jquery-3.2.1.min.js" ></script>
+	<title>login</title>	
+	<script>
+		{{ content|safe }}
+		$(function(){
+			$("#button").click(function(){
+				var uid=$("#uid").val();
+				var psw=$("#psw").val();
+				if(uid==null || uid=="") {
+					alert("请输入用户名");
+					return false;
+				}
+				else if(psw==null || psw=="") {
+					alert("请输入密码");
+					return false;
+				}
+				$("#myform").submit();
+				return true;
+			});
+		});
+	</script>
+	
+</head>
+<body class="login" >
+	<div class="login_m">
+	
+		<div class="login_logo">
+			<img src="/static/MainPage/images/logo.png" width="196" height="46">
+		</div>
+		
+		<form action="/index/"  name="myform" id="myform" method="post">
+			{% csrf_token %}
+			<div class="login_boder">
+				<div class="login_padding" id="login_model">
+				
+					<h2>用户名</h2>
+					<label>
+						<input type="text" name="uid" id="uid" class="txt_input"  value="">
+					</label>
+					<h2>密码</h2>
+					<label>
+						<input type="password" name="psw" id="psw" class="txt_input"  value="">
+					</label>
+		
+					<div class="rem_sub">
+						<div class="rem_sub_l">
+							<input type="checkbox" name="checkbox" id="save_me">
+							<label for="checkbox">记住我</label>
+						</div>
+						<label>
+							<input type="button" class="sub_button" name="button" id="button" value="登陆" style="opacity: 0.7;">
+						</label>
+					</div>
+					
+				</div>
+			</div>
+		</form>
+		
+	</div>
+	
+</body>
+</html>

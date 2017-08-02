@@ -1,0 +1,93 @@
+﻿<!DOCTYPE HTML>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="device-width, user-scalable=no,
+	initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/static/MainPage/images/splash/splash-icon.png">
+<link rel="apple-touch-startup-image" href="/static/MainPage/images/splash/splash-screen.png" 			media="screen and (max-device-width: 320px)" />  
+<link rel="apple-touch-startup-image" href="/static/MainPage/images/splash/splash-screen_402x.png" 		media="(max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2)" /> 
+<link rel="apple-touch-startup-image" sizes="640x1096" href="/static/MainPage/images/splash/splash-screen_403x.png" />
+<link rel="apple-touch-startup-image" sizes="1024x748" href="/static/MainPage/images/splash/splash-screen-ipad-landscape" media="screen and (min-device-width : 481px) and (max-device-width : 1024px) and (orientation : landscape)" />
+<link rel="apple-touch-startup-image" sizes="768x1004" href="/static/MainPage/images/splash/splash-screen-ipad-portrait.png" media="screen and (min-device-width : 481px) and (max-device-width : 1024px) and (orientation : portrait)" />
+<link rel="apple-touch-startup-image" sizes="1536x2008" href="/static/MainPage/images/splash/splash-screen-ipad-portrait-retina.png"   media="(device-width: 768px)	and (orientation: portrait)	and (-webkit-device-pixel-ratio: 2)"/>
+<link rel="apple-touch-startup-image" sizes="1496x2048" href="/static/MainPage/images/splash/splash-screen-ipad-landscape-retina.png"   media="(device-width: 768px)	and (orientation: landscape)	and (-webkit-device-pixel-ratio: 2)"/>
+
+<title></title>
+
+<link href="/static/MainPage/styles/style.css"     		rel="stylesheet" type="text/css">
+<link href="/static/MainPage/styles/framework.css" 		rel="stylesheet" type="text/css">
+<link href="/static/MainPage/styles/bootstrap.min.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/static/MainPage/scripts/jquery.js"></script>
+<script type="text/javascript" src="/static/MainPage/scripts/jqueryui.js"></script>
+<script type="text/javascript" src="/static/MainPage/scripts/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/MainPage/scripts/owl.carousel.min.js"></script>
+<script type="text/javascript" src="/static/MainPage/scripts/jquery.swipebox.js"></script>
+<script type="text/javascript" src="/static/MainPage/scripts/snap.js"></script>
+<script type="text/javascript" src="/static/MainPage/scripts/contact.js"></script>
+<script type="text/javascript" src="/static/MainPage/scripts/custom.js"></script>
+<script type="text/javascript" src="/static/MainPage/scripts/framework.js"></script>
+<script type="text/javascript" src="/static/MainPage/scripts/framework.launcher.js"></script>
+
+{% block head %}
+{% endblock %}
+
+</head>
+<body>
+
+<div id="preloader">
+	<div id="status">
+    	<p class="center-text">
+			加载中...
+            <em>缓慢加载中，请稍等！!</em>
+        </p>
+    </div>
+</div>
+
+<div class="top-deco"></div>
+<div class="content">
+
+	<div class="header">
+    	<a href="#" class="homepage-logo">
+        	<img src="/static/MainPage/images/logo.png" style="width:185px ; height:55px " alt="img">
+        </a>
+        <a href="/index" class="go-home" style="right:0px;">HOME</a>
+    </div>
+    
+    <div class="decoration"></div>
+</div>
+
+{% block body %}
+{% endblock %}
+
+<div class="content">
+	
+    <div class="decoration"></div>         
+    
+    <div class="footer">
+    	<div class="socials">
+            <a href="https://pt.hnu.edu.cn/zfca/login"  target="blank"   title="这是湖大校内个人信息门户的友情链接">
+            	<span class="btn1 btn-radius-small mainlink">H</span>
+            </a>
+            <a href="http://kczx.hnu.cn/G2S/ShowSystem/Index.aspx"  target="blank"  title="这是课程中心的友情链接">
+            	<span class="btn1 btn-radius-small mainlink">N</span>
+            </a>
+            <a href="/index/logout" title="用户登出">
+            	<span class="btn1 btn-radius-small mainlink">U</span>
+            </a>
+        </div>
+        <div class="clear"></div>
+        <p class="copyright">
+        	COPYRIGHT 2017<br>
+            HNU LAB
+        </p>
+        
+    </div> 
+    
+</div>
+<div class="bottom-deco"></div>
+
+</body>
+</html>

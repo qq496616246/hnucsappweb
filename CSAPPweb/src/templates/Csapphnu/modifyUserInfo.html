@@ -1,0 +1,107 @@
+{% extends "MainPage/basepage.html" %}
+{% block head %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes" />
+    <meta name="viewport" content="width=device-width , user-scalable=no , initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0"  >
+    <title>修改个人信息</title>
+</head>
+<link href="/static/MainPage/styles/style_btn.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="/static/Csapphnu/css/bootstrap.min.css"></link>
+<link rel="stylesheet" type="text/css" href="/static/Csapphnu/css/modifyuserinfocss.css"></link>
+<!--引用jquery的资源js-->
+<script type="text/javascript" src="/static/Csapphnu/js/jquery-1.12.4.min.js"></script>
+<!--引用Bootstrap-->
+<script type="text/javascript" src="/static/Csapphnu/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/Csapphnu/js/modifyuserinfojs.js"></script>
+
+<script type="text/javascript">
+    //弹出数据更新成功的提示
+     var getupdateResult = {{ updateResult|safe }};
+     if (getupdateResult != ''){
+         alert(getupdateResult);
+     }
+
+</script>
+{% endblock head %}
+
+{% block body %}
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="form-group">
+                    <marquee behavior="alternate" loop="-1"><h2 style="color: blue ; border: 3px solid green ;text-align: center">
+                        用户信息修改</h2></marquee>
+                </div>
+                <div class="reg_form">
+                    <form action="/logininforegester/" method="post" id="userinfo-form">
+                        {% csrf_token %}
+                        <fieldset >
+                            <div class="form-group">
+                                <label for="registrationnumber">学号/工号</label>
+                                <input type="text" class="form-control" id="registrationnumber"
+                                       value="{{ logininfo.loginnumber }}"
+                                       name="registrationnumber" readonly >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="loginusername">姓名</label>
+                                <input type="text" class="form-control" id="loginusername"
+                                       value="{{ logininfo.loginname }}"
+                                       name="loginusername" readonly>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="loginuserclass">所在班级</label>
+                                <input type="text" class="form-control" id="loginuserclass"
+                                       value="{{ logininfo.loginclass }}"
+                                       name="loginuserclass" readonly>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="loginassistantname">助教姓名</label>
+                                <input type="text" class="form-control" id="loginassistantname"
+                                       value="{{ logininfo.assistantname }}"
+                                       name="loginassistantname" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="logintype">用户身份</label>
+                                <input type="text" class="form-control" id="logintype" value="{{ logininfo.usertype }}"
+                                       name="logintype" readonly>
+                            </div>
+                        </fieldset>
+                        <div class="form-group">
+                            <label for="loginuserpassword">登录密码</label>
+                            <input type="password" class="form-control" id="loginuserpassword" placeholder="登录密码"
+                                   name="loginuserpassword">
+                            <span class="glyphicon glyphicon-remove-circle error-span" style="display: none">密码是6到12位字母、数字，还可包含@!#$%^&*.~字符！</span>
+                            <span class="glyphicon glyphicon-ok-circle right-span" style="display: none">成功</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginaginpassword">确认密码</label>
+                            <input type="password" class="form-control" id="loginaginpassword" placeholder="确认密码"
+                                   name="loginaginpassword">
+                            <span class="glyphicon glyphicon-remove-circle error-span"
+                                  style="display: none">两次输入的密码不一致!</span>
+                            <span class="glyphicon glyphicon-ok-circle right-span" style="display: none">成功</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="logintelphone">联系方式(电话)</label>
+                            <input type="text" class="form-control" id="logintelphone" placeholder="联系方式"
+                                   name="logintelphone">
+                            <span class="glyphicon glyphicon-remove-circle error-span" style="display: none">电话号码不符合规范(11位，且必须以1开头，第二位可以是3/4/5/7/8)</span>
+                            <span class="glyphicon glyphicon-ok-circle right-span" style="display: none">成功</span>
+                        </div>
+                        <input type="submit" class="btn btn-success btn-block" style="margin-bottom: 10px"
+                               id="submitbtn" value="保存">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock body %}

@@ -1,0 +1,124 @@
+body{
+    font-family: 微软雅黑;
+    background-image:url(../images/body-bg.png);
+}
+
+/*
+温馨提示的css
+ */
+.alertmessage{
+    font-size: 20px;
+}
+.alertmessage-a{
+    margin-top: 50px;
+}
+/*
+巨幕的css
+ */
+.jumbotron {
+    background: url(/static/Csapphnu/images/backgroud.jpg) center center no-repeat;
+    padding: 24px 0;
+    margin-bottom: 0px;
+}
+.botronshow h3{
+    margin: 0px;
+    color: white;
+}
+@media screen and (min-width: 768px){
+    .jumbotron h3 {
+        font-size: 20px;
+    }
+    .jumbotron .p{
+        font-size: 10px;
+    }
+}
+
+.common_title {
+     height: 40px;
+     background-color: #ff722b;
+}
+.common_title h3{
+    height: 40px;
+    padding: 0px;
+    margin: 0px 0px 0px  -30px;
+    font-size: 20px;
+    color: #fff;
+    line-height: 40px;
+    text-indent: 20px;
+}
+.common_title button{
+    min-width: 30px;
+    margin: 3px 10px 0 0;
+}
+
+/*
+助教信息显示的CSS
+ */
+.assistantshow-table{
+    text-align: center;
+}
+
+.assistantshow-table-tr th{
+    text-align: center;
+}
+/*
+助教信息显示字体
+ */
+.assistantshow-table-tbody tr td{
+    font-size: 16px;
+}
+/*
+助教信息显示的超链
+ */
+.assistantshow-table-tbody tr td a{
+    margin-left: 10px;
+}
+
+/*
+助教添加显示的CSS
+ */
+.assistantadd-table{
+    text-align: center;
+}
+
+.assistantadd-table-tr th{
+    text-align: center;
+}
+/*
+助教添加显示字体
+ */
+.assistantadd-table-tbody tr td{
+    font-size: 16px;
+}
+/*
+助教添加的超链
+ */
+.assistantadd-table-tbody tr td a{
+    margin-left: 10px;
+}
+/*
+助教添加的输入框
+ */
+.assistantadd-table-tbody tr td input{
+    max-width: 200px;
+}
+
+.seletecsscss{
+    background-color:azure;
+}
+
+.go-home {
+    color: #3d3e42;
+    background-image: url(../images/home-button.png);
+    background-size: 36px 36px;
+    background-position: 8px 0px;
+    background-repeat: no-repeat;
+    position: absolute;
+    right: 60px;
+    top: 0px;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    padding-top: 40px;
+    font-family: 'Dosis', sans-serif;
+}

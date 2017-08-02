@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes" />
+    <meta name="viewport" content="width=device-width , user-scalable=no , initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0"  >
+    <title>学生分组</title>
+</head>
+<link rel="stylesheet" type="text/css" href="/static/Csapphnu/css/bootstrap.min.css"></link>
+<link rel="stylesheet" type="text/css" href="/static/Csapphnu/css/studentgroupcss.css"></link>
+<!--引用jquery的资源js-->
+<script type="text/javascript" src="/static/Csapphnu/js/jquery-1.12.4.min.js"></script>
+<!--引用Bootstrap-->
+<script type="text/javascript" src="/static/Csapphnu/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/Csapphnu/js/studentgroupjs.js"></script>
+<script type="text/javascript" src="/static/Csapphnu/js/studentgroup-my-js.js"></script>
+<script type="text/javascript">
+      //拿到分组操作的结果
+       var grounpResult = {{ grounpResult|safe }};
+       if (grounpResult != ''){
+           alert(grounpResult) ;
+       }
+
+</script>
+
+<body>
+<!--添加个巨幕-->
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 botronshow">
+                    <h3><span class="glyphicon glyphicon-heart-empty"></span>{{ username }}老师，欢迎您的访问</h3>
+                </div>
+
+                <div class="col-md-2 col-sm-2 col-xs-2 col-lg-2">
+                    <a href="/index" class="go-home" style="right:0px;float: right;">返回</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--下拉列表，进行选择所要进行分组的班级 -->
+    <div class="container">
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle btn-block" type="button" id="dropdownMenu1" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="true">
+                切换班级({{ currentClassNumberInfo }})
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu changeClass-ul" aria-labelledby="dropdownMenu1">
+                {% for  classevery in infoAssistantOrTeacherClass %}
+                    <li><a href="#" name="{{classevery}}" id="changeClassList" data-toggle="modal"  data-target="#modal01">{{classevery}}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <!--功能选择区-->
+    <div class="container">
+        <div class="common_title">
+                <h3 class="pull-left"><span class="glyphicon glyphicon-hand-right"></span>功能选择区</h3>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="input-group">
+                <span class="input-group-addon  glyphicon glyphicon-hand-right " id="basic-addon1">功能(1)</span>
+                <input type="text"  placeholder="输入分组数目" class="form-control input-groupnumber" id="input-groupnumber">
+                <span class="input-group-btn"><button class="btn btn-primary " id="okstudentmaxgroupnumber">确定</button></span>
+                </div>
+            </div>
+            <!--选择对应的学生分组序号-->
+            <div class="col-lg-12 col-md-12 col-sm-12 selectnumbet" >
+                 <div class="input-group">
+                 <span class="input-group-addon  glyphicon glyphicon-hand-right " id="basic-addon1">功能(2)选择学生分组序号</span>
+                 <select class="form-control" id="select-option">
+                 </select>
+                 </div>
+            </div>
+        </div>
+    </div>
+
+      <!--学生名单显示头-->
+    <div class="container studentheader-title">
+        <div class="common_title">
+                <h3 class="pull-left"><span class="glyphicon glyphicon-pencil"></span>学生名单</h3>
+        </div>
+    </div>
+    <!--学生名单-->
+    <div class="container">
+        <div class="row">
+            <div calss="student-select-btn" id="student-select-btn">
+                <div class="col-lg-12 " id="addstudentinfodiv">
+                    {% for studentinfo in grounpInfo %}
+                        <button id="studentbtn" value="{{ studentinfo.uid }}" class="{{ studentinfo.uid }} btn btn-primary">{{ studentinfo.name }}</button>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--分组详情的头标题-->
+    <div class="container grounp-current">
+        <div class="common_title">
+                <h3 class="pull-left"><span class="glyphicon glyphicon-list-alt"></span>本次分组详情</h3>
+        </div>
+    </div>
+
+    <!--分组的内容-->
+    <div class="container">
+        <form action="" method="post" id="submitgrounp-form" enctype="multipart/form-data">
+            <input type="hidden" id="studentSelectClass" name="studentSelectClass" value="{{ currentClassNumberInfo }}">
+            <input type="hidden" id="savecountnumber" class="savecountnumber" value="0" name="savecountnumber">
+            <input type="hidden" id="savedeletenumber" class="savedeletenumber" value="0" name="savedeletenumber">
+            {% csrf_token %}
+             <ul class="student-grounp-detail" id="student-grounp-detail">
+
+             </ul>
+        </form>
+    </div>
+<button class="btn btn-success btn-block btn-lg"  data-toggle="modal"  data-target="#modal02" id="submitBtn"><span class="glyphicon glyphicon-check"></span>提交学生分组情况详情</button>
+
+
+    <!-- 小模态框1---切换班级信息 -->
+	<div class="modal fade" id="modal01">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 style="color: red"><span class="glyphicon glyphicon-question-sign"></span>友情提示</h4>
+				</div>
+				<div class="modal-body">
+                    <strong>您确定要<label style="font-size: 16px;color: red ">切换</label>所选择的班级吗？</strong>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-primary" data-dismiss="modal" id="okselectbtn">确定</button>
+					<button class="btn btn-warning" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<!-- 小模态框2---提交学生分组信息 -->
+	<div class="modal fade" id="modal02">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 style="color: red"><span class="glyphicon glyphicon-question-sign"></span>友情提示</h4>
+				</div>
+				<div class="modal-body">
+                    <strong>您确定要<label style="font-size: 16px;color: red ">提交</label>所进行的学生分组情况吗？</strong>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-primary" data-dismiss="modal" id="oksubmitBtn">确定</button>
+					<button class="btn btn-warning" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<!-- 小模态框3---删除点击的学生分组信息 -->
+	<div class="modal fade" id="modal03">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 style="color: red"><span class="glyphicon glyphicon-question-sign"></span>友情提示</h4>
+				</div>
+				<div class="modal-body">
+                    <strong>您确定要<label style="font-size: 16px;color: red ">删除</label>所选择的学生分组信息吗？</strong>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-primary" data-dismiss="modal" id="deletesubmitBtn">确定</button>
+					<button class="btn btn-warning" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <!--历史分组信息-->
+    <div class="container grounp-history">
+        <div class="common_title">
+                <h3 class="pull-left"><span class="glyphicon glyphicon-align-left"></span>历史分组情况</h3>
+                <button class="btn btn-default pull-right showbtn" id="showgrounpstudentinfo" style="margin: 2px 3px"><span class="glyphicon glyphicon-resize-vertical"></span>显示/不显示</button>
+        </div>
+    </div>
+
+<!--历史表格内容-->
+<div class="container">
+        <div class="table-responsive">
+            <table class="table table-bordered studentgrounp-table" >
+                <thead >
+                    <tr class="studentgrounp-table-tr">
+                        <th style="text-align:center;">小组号</th>
+                        <th style="text-align:center;">学生姓名</th>
+                        <th style="text-align:center;">学生学号</th>
+                        <th style="text-align:center;">学生班级</th>
+                    </tr>
+                </thead>
+                <tbody class="studentgrounp-table-tbody" id="studentgrounp-table-tbody">
+                    {% for everystudent in grounpInfo %}
+                        <tr>
+                            {% if everystudent.student_grounp == None %}
+                                <td style="text-align:center;">无</td>      <!--如果学生没有分组则显示无-->
+                            {% else %}
+                                <td style="text-align:center;">{{ everystudent.student_grounp }}</td>
+                            {% endif %}
+                            <td>{{ everystudent.name }}</td>
+                            <td>{{ everystudent.uid }}</td>
+                            <td>{{ everystudent.student_class_name }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

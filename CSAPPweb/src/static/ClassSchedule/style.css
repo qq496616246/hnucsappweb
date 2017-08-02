@@ -1,0 +1,94 @@
+@CHARSET "UTF-8";
+
+.gray-canvas {
+	position:absolute;
+	left:0;
+	top:0;
+	width:100%;
+	height:100%;
+	z-index:9998;
+	opacity:0.5;
+	filter:Alpha(opacity=50);
+	background:#626262;
+}
+
+.dialog {
+	position:absolute;
+	left:10%;
+	top:10%;
+	width:80%;
+	height:80%;
+	z-index:9999;
+	margin:auto;
+	background:#ffffd7;
+	border-radius:2%;
+}
+
+.class {
+	overflow-y:scroll;
+	width:100%;
+	height:100%;
+}
+.class h1 {
+	font-size:25px;
+	margin-top: 10%;
+	margin-left: 5%;
+}
+.class ul {
+	margin-top: 5%;
+	margin-left: 10%;
+}
+.class li {
+	margin-bottom:5%;
+	margin-right:5%;
+	font-size:18px;
+	line-height:25px;
+}
+
+.class-setting-select{
+    background: url(arrow.png) right center no-repeat; 
+   /* the width and the height of your image */
+    width: 250px;
+    height: 30px;
+    overflow: hidden;
+    border: none;
+    bottom:10px;
+}
+.class-setting-select select{
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    background:transparent;
+    border:solid 1px black;
+    padding-left:10px;
+    width: 100%;
+    height:100%;    
+}
+.text-cur{
+	font-family:arial,sans-serif;
+	font-size:13px;
+	width:69%;
+	height:150px;
+	padding:10px;
+	background:transparent;
+	border:1px solid black;
+	float: left;
+	position: relative;
+}
+.text-nocur{
+	font-family:arial,sans-serif;
+	font-size:13px;
+	width:69%;
+	height:35px;
+	background:transparent;
+	border:1px solid black;
+    float: left;
+	position: relative;
+}
+
+.line{
+	margin: 30px auto;
+	width:90%;
+	height:1px;
+	background:#aeaeae;
+}

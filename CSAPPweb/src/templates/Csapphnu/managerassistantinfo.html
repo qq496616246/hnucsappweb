@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes" />
+    <meta name="viewport" content="width=device-width , user-scalable=no , initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0"  >
+    <title>教师助教信息管理</title>
+</head>
+<link rel="stylesheet" type="text/css" href="/static/Csapphnu/css/bootstrap.min.css"></link>
+<link rel="stylesheet" type="text/css" href="/static/Csapphnu/css/manageassistant.css"></link>
+<!--引用jquery的资源js-->
+<script type="text/javascript" src="/static/Csapphnu/js/jquery-1.12.4.min.js"></script>
+<!--引用Bootstrap-->
+<script type="text/javascript" src="/static/Csapphnu/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="/static/Csapphnu/js/manageassistantjs.js"></script>
+<script type="text/javascript" src="/static/Csapphnu/js/manageassistant-my-js.js"></script>
+
+<script type="text/javascript">
+        //打印显示添加操作是否成功
+        var addresultPrintf = {{ addresultPrintf|safe }};
+        if(addresultPrintf != ''){
+            alert(addresultPrintf);
+        }
+        //打印显示删除是否成功
+        var deleteRusult = {{ deleteResult|safe }};
+        if(deleteRusult != ''){
+            alert(deleteRusult);
+        }
+        //打印显示更新操作是否成功
+        var updataResult = {{ updataResult|safe }};
+        if(updataResult != ''){
+            alert(updataResult);
+        }
+</script>
+<body>
+    <!--添加个巨幕-->
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 botronshow">
+                    <h3><span class="glyphicon glyphicon-heart-empty"></span>{{ teacherinfo }}老师，欢迎您的访问<span class="glyphicon glyphicon-heart-empty"></span></h3>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-2 col-lg-2">
+                    <a href="/index" class="go-home" style="right:0px;float: right;">返回</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="common_title">
+                <h3 class="pull-left"><span class="glyphicon glyphicon-user"></span>助教信息</h3>
+            <button class="btn btn-default pull-right showbtn" id="showassistantbtn"><span class="glyphicon glyphicon-resize-vertical"></span>显示/不显示</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table table-bordered assistantshow-table" >
+                <thead >
+                    <tr class="assistantshow-table-tr">
+                        <th >编号</th>
+                        <th>助教学号</th>
+                        <th>助教姓名</th>
+                        <th>助教班级</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody class="assistantshow-table-tbody" id="assistantshow-table-tbody">
+                    {% for everydata in dbinfoDatda %}
+                        <tr>
+                            <td></td>
+                            <td>{{ everydata.get_Number }}</td>
+                            <td>{{ everydata.get_Name }}</td>
+                            <td>{{ everydata.get_Class }}</td>
+                            <td>
+                                <a href="#" data-toggle="modal"  data-target="#modal01" name="{{ everydata.get_Number }}" id="deletbtnlianjie" ><span class="glyphicon glyphicon-trash"></span>删除</a>
+                                <a href="#" data-toggle="modal"  data-target="#modal02" name="{{ everydata.get_Number }}@{{ everydata.get_Name }}@{{ everydata.get_Class }}" id="updatabtnlianjie"><span class="glyphicon glyphicon-refresh"></span>更新</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--添加助教信息表头模块-->
+    <div class="container">
+        <div class="common_title">
+                <h3 class="pull-left"><span class="glyphicon glyphicon-pencil"></span>添加助教</h3>
+                <button class="btn btn-success pull-right" id="addassistanttablenumber"><span class="glyphicon glyphicon-plus-sign"></span>增加表格条目</button>
+        </div>
+    </div>
+    <!--添加助教信息表格模块-->
+    <div class="container">
+        <form action="" method="post" id="addtable-form" enctype="multipart/form-data">
+            <div class="table-responsive">
+                {% csrf_token %}
+                <input type="hidden" name="tablecount" value="1" id="tablecountid">
+                <input type="hidden" id="tableinfoindex" name="tableinfoindex">
+                <table class="table table-bordered assistantadd-table">
+                    <thead>
+                    <tr class="assistantadd-table-tr">
+                        <th><input type="checkbox" id="selectcontro" onclick="seleteIsAll(this.checked)">全选/全不选</th>
+                        <th>助教学号</th>
+                        <th>助教姓名</th>
+                        <th>助教班级</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody class="assistantadd-table-tbody" id="assistantaddd-table-tbody">
+                    <tr>
+                        <td><input type="checkbox" name="addismessage" value="1"></td>
+                        <td><input type="text" name="assistantNumber1" id="assistantNumber1"></td>
+                        <td><input type="text" name="assistantName1" id="assistantName1"></td>
+                        <!--自动生成老师对应所带的班级-->
+                        <td>
+                            <select name="selectClass1" class="seletecsscss">
+                                {% for classNumber in belongtoClassNumber %}
+                                <option value="{{ classNumber }}">{{ classNumber }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <!--<td><input type="text" name="assistantClass1" id="assistantClass1"></td>-->
+                        <td>
+                            <a href="#" data-toggle="modal" data-target="#modal03"><span
+                                    class="glyphicon glyphicon-ok"></span>添加</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </div>
+
+    <!-- 小模态框---添加助教 -->
+	<div class="modal fade" id="modal03">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 style="color: red"><span class="glyphicon glyphicon-question-sign"></span>友情提示</h4>
+				</div>
+				<div class="modal-body">
+                    <strong>您确定要<label style="font-size: 16px;color: red ">添加</label>所选择的助教信息吗？</strong>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-primary" data-dismiss="modal" id="okaddbtn">确定</button>
+					<button class="btn btn-warning" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <!-- 小模态框1---删除助教信息 -->
+	<div class="modal fade" id="modal01">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 style="color: red"><span class="glyphicon glyphicon-question-sign"></span>友情提示</h4>
+				</div>
+				<div class="modal-body">
+                    <strong>您确定要<label style="font-size: 16px;color: red ">删除</label>所选择的助教信息吗？</strong>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-primary" data-dismiss="modal" id="okdeletebtn">确定</button>
+					<button class="btn btn-warning" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <!-- 小模态框2---更新助教信息 -->
+	<div class="modal fade" id="modal02">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 style="color: red"><span class="glyphicon glyphicon-question-sign"></span>友情提示</h4>
+				</div>
+				<div class="modal-body">
+                    <form action="" method="post" id="updataInfo-form">
+                        {% csrf_token %}
+                    <span style="color: red">(学号内容不支持更新)</span>
+                    <label>助教学号：<input type="text" id="updataNumber" name="updataNumber" readonly style="color:lavender"></label>
+                    <label>助教姓名：<input type="text" id="updataName" name="updataName"></label>
+                    <label>助教班级：<input type="text" id="updataClass" name="updataClass"></label>
+                    <br>
+                    <strong>您确定要<label style="font-size: 16px;color: red ">更新</label>所选择的助教信息吗？</strong>
+                    </form>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-primary"  id="okupdatabtn">确定</button>
+					<button class="btn btn-warning" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <div class="container">
+          <button class="btn btn-success pull-left btn-block" data-toggle="modal" data-target="#modal03" id="addallssistanttodbbtn"><span class="glyphicon glyphicon-ok-circle"></span>提交选中的助教信息</button>
+    </div>
+    <div class="container">
+            <h4 style="color: red">{{ addresult }}</h4>
+    </div>
+
+    <div class="container alertmessage-a">
+        <a  href="#" onclick="alertmessage();return false;" id="alertmessage" class="alertmessage"><span class="glyphicon glyphicon-question-sign"></span>温馨提示</a>
+    </div>
+</body>
+</html>

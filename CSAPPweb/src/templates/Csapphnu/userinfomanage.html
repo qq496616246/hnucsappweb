@@ -1,0 +1,42 @@
+{% extends "MainPage/basepage.html" %}
+
+{% block head %}
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes" />
+<meta name="viewport" content="width=device-width , user-scalable=no , initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0"  >
+<title>信息管理界面</title>
+
+<link href="/static/MainPage/styles/style_btn.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="/static/Csapphnu/css/bootstrap.min.css"></link>
+<link rel="stylesheet" type="text/css" href="/static/Csapphnu/css/userinfomanagecss.css"></link>
+
+<!--引用jquery的资源js-->
+<script type="text/javascript" src="/static/Csapphnu/js/jquery-1.12.4.min.js"></script>
+<!--引用Bootstrap-->
+<script type="text/javascript" src="/static/Csapphnu/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/Csapphnu/js/userinfomanagejs.js"></script>
+<!--图片变换-->
+<script type="text/javascript" src="/static/Csapphnu/js/slide.js"></script>
+{% endblock head %}
+
+
+{% block body%}
+<div class="container "  id="pictureposition" >
+    <div class="slide fl "  >
+        <ul class="slide_pics">
+            <li><img src="/static/Csapphnu/images/school1.jpg" alt="个人信息修改模块" id="imgselete1"></li>
+            <li><img src="/static/Csapphnu/images/school2.jpg" alt="学生课程分组模块" id="imgselete2"></li>
+            <li><img src="/static/Csapphnu/images/school3.jpg" alt="助教信息管理模块" id="imgselete3"></li>
+        </ul>
+        <ul class="points"></ul>
+    </div>
+</div>
+<div class="container" align="center">
+    <div class="btn-group btn-group-lg" style="margin-top: 10px">
+	<button class="btn btn-info prev ">上一个功能模块</button>
+	<button class="btn btn-default next ">下一个功能模块</button>
+	</div>
+</div>
+{% endblock body %}
