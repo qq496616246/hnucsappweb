@@ -24,6 +24,7 @@ class showAssistanInfo(object):
 
 #显示助教信息
 def managerAssistantInfo(request):
+    try: #抛个异常判断，防止出现意外情况
         #首先判断是否是属于登录中的用户并且是否有足够的权限（这个模块只有老师可以进），否则跳转到登录页面中
         isOnlineUser = request.session.get('uid');
         isEnoughtPermission = request.session.get('permission');
@@ -87,6 +88,8 @@ def managerAssistantInfo(request):
                 return render(request, 'Csapphnu/managerassistantinfo.html', context);
             else: #没有足够权限的则显示到主界面
                 return HttpResponseRedirect('/index/');
+    except Exception as  errors:
+        return HttpResponseRedirect('/index/');
 
 #添加助教信息
 def addInfo(request):

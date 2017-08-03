@@ -18,5 +18,6 @@ from django.conf.urls import url, include
 urlpatterns = [
     url(r'^index/', include("MainPage.urls")),
     url(r'^ClassSchedule/', include("ClassSchedule.urls")),
-    url(r'^', include('Csapphnu.urls')),
+    url(r'^', include('Csapphnu.urls')),               #个人信息管理
+    url(r'^systemmanagement/',include('SystemManagementFun.urls')), #系统管理
 ]

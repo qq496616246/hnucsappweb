@@ -1,0 +1,49 @@
+/*
+csapp系统的后台管理界面的CSS
+ */
+
+.body{
+    font-family: 微软雅黑;
+}
+.functiontabsigle{
+    display: none;
+}
+.functiontabmore{
+    display: none;
+}
+.functiontabshowinfo{
+    display: none;
+}
+
+.formstudent {
+    border-collapse:separate;
+    border-spacing:0px 12px
+}
+/*
+显示用户信息的表格css
+ */
+table.userinfoshowtab {
+    font-family: verdana,arial,sans-serif;
+    font-size:8px;
+    color:#333333;
+    border-width: 1px;
+    border-color: #999999;
+    border-collapse: collapse;
+    width: 100%;
+}
+table.userinfoshowtab th {
+    background-color:#c3dde0;
+    border-width: 1px;
+    padding: 6px;
+    border-style: solid;
+    border-color: #a9c6c9;
+}
+table.userinfoshowtab tr {
+    background-color:#d4e3e5;
+}
+table.userinfoshowtab td {
+    border-width: 1px;
+    padding: 6px;
+    border-style: solid;
+    border-color: #a9c6c9;
+}

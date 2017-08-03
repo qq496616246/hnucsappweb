@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>系统用户信息管理</title>
+</head>
+<!--引用资源-->
+<link rel="stylesheet" type="text/css" href="/static/MainPage/styles/style_btn.css">
+<link rel="stylesheet" type="text/css" href="/static/SystemManagementFun/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="/static/SystemManagementFun/themes/icon.css">
+<link rel="stylesheet" type="text/css" href="/static/SystemManagementFun/css/managesystemcss.css">
+<script type="text/javascript" src="/static/SystemManagementFun/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="/static/SystemManagementFun/js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/static/SystemManagementFun/js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="/static/SystemManagementFun/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/static/SystemManagementFun/js/messages_zh.js"></script>
+<script type="text/javascript" src="/static/SystemManagementFun/js/managesystem.js"></script>
+
+<script type="text/javascript">
+    var sigleResult = {{ sigleResult|safe}}; //单个添加用户的结果显示
+    var moreResult = {{ moreaddResult|safe}}; //批量添加用户的结果显示
+    if(moreResult != ''){
+        alert("成功添加用户数为："+moreResult);
+    }
+    else if (moreResult == '0'){ //表示添加的人数为0，那么就是重复的提交了已经存在的用户信息
+        alert("添加用户数为："+moreResult+"，无法添加已经存在的用户信息!");
+    }
+    if (sigleResult != ''){
+        if(sigleResult == '1'){ //表示添加成功
+            alert("添加成功!");
+        }
+        else if(sigleResult =='0'){ //表示添加失败
+            alert("添加失败!无法添加重复的用户");
+        }
+    }
+</script>
+<body>
+    <!--采用分块的布局写（我主要分了五个部分）-->
+    <div id="layoutID" style="width:700px;height:500px" class="easyui-layout" data-options="fit:true">
+        <!-- 区域面板--北边 -->
+        <div data-options="region:'north',split:true,border:true,iconCls:'icon-remove',collapsible:true"
+             style="height:60px;">
+            <h1  align="center">欢迎访问湖南大学Csapp信息管理平台</h1>
+        </div>
+        <!-- 区域面板--南边 -->
+        <div data-options="region:'south',split:true" style="height:80px;">
+                    <div class="decorationa" style="text-align: center" align="center">
+                        <a href="https://pt.hnu.edu.cn/zfca/login" target="blank" title="这是湖大校内个人信息门户的友情链接" style="text-align: center">
+                            <span class="btn1 btn-radius-small mainlink">H</span>
+                        </a>
+                        <a href="http://kczx.hnu.cn/G2S/ShowSystem/Index.aspx" target="blank" title="这是课程中心的友情链接">
+                            <span class="btn1 btn-radius-small mainlink">N</span>
+                        </a>
+                        <a href="/index/logout" title="用户登出">
+                            <span class="btn1 btn-radius-small mainlink">U</span>
+                        </a>
+                    </div>
+            <br><br><br><br>
+            <div align="center" style="margin-top: -50px">
+                <p class="copyright" >
+                    COPYRIGHT 2017<br>
+                    HNU LAB
+                </p>
+            </div>
+        </div>
+
+        <!-- 区域面板--西边 -->
+        <div data-options="region:'west',title:'功能区1',split:true,iconCls:'icon-tip'" style="width:120px;">
+            <!-- accordion模块 -->
+   			<div class= "easyui-accordion" data-options="selected:-1">
+                <!--显示用户信息-->
+                <div title="显示用户信息">
+                    <a id="showallstudentinfo" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">学生信息</a>
+                    <a id="showallteacherinfo" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">老师信息</a>
+                    <a id="showallassistantinfo" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">助教信息</a>
+
+                </div>
+   				<div title="单个添加信息">
+                <a id="addstudentinfosigle" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'">添加学生信息</a>
+                <a id="addteacherinfosigle" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'">添加老师信息</a>
+                <a id="addassistantsigle" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'">添加助教信息</a>
+
+                </div>
+                <div title="批量添加信息">
+   				<!-- 超链按钮的显示 -->
+   				<a id="addstudentinfomore" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-folder'">添加学生信息</a>
+				<a id="addsteacherinfomore" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-folder'">添加老师信息</a>
+   				<a id="addassistantmore" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-folder'">添加助教信息</a>
+                </div>
+   				<div title="功能区四"><h3>开发中</h3></div>
+   				<div title="功能区五"><h3>开发中</h3></div>
+   			</div>
+        </div>
+        <!-- 区域面板--中间 -->
+        <div data-options="region:'center',title:'内容显示'"
+             style="padding:5px;background:#eee;" id="layoutcenter">
+            <!--用户信息显示-->
+            <div id = "tableeasyuishowinfo" class="easyui-tabs functiontabshowinfo" data-options="plain:true,border:false,fit:true" style="width: 500px;height: 250px;">
+                <div title="学生信息" id="showstudentinfo" class="showuserinfo" style="overflow:scroll;">
+                    <table id="studentinfoshowtab" class="userinfoshowtab" >
+                        <thead style="text-align: center">
+                        <th>学号</th>
+                        <th>姓名</th>
+                        <th>班级</th>
+                        <th>权限</th>
+                        <th>联系方式</th>
+                        <th>更新操作</th>
+                        <th>删除操作</th>
+                        </thead>
+                        <tbody style="text-align: center" id="studentbodyinfo">
+                        {% for everyuesr in allstudentinfo %}
+                        <tr>
+                            <td>{{everyuesr.uid}}</td>
+                            <td>{{everyuesr.name}}</td>
+                            <td>{{everyuesr.student_class_name}}</td>
+                            <td>{{everyuesr.permission}}</td>
+                            <td>{{everyuesr.contact}}</td>
+                            <td>
+                                <a href="#" id="updatatableinfostu" class="{{everyuesr.uid}}">更新</a>
+                            </td>
+                            <td>
+                                 <a href="#" id="deletetableinfostu" class="{{everyuesr.uid}}">删除</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <div id="studentinfopage" class="easyui-pagination"
+                         data-options="total:{{allstudentinfoNumber}},pageSize:10,pageList:[5,10,15,20,30],showRefresh:true"
+                         style="background: #efefef;
+						border: 1px solid #ccc;">
+                    </div>
+                </div>
+                <div title="老师信息" id="showteacherinfo" class="showuserinfo" style="overflow:scroll;">
+                    <table id="teacherinfoshowtab" class="userinfoshowtab" >
+                        <thead style="text-align: center">
+                        <th>工号</th>
+                        <th>姓名</th>
+                        <th>所带班级</th>
+                        <th>权限</th>
+                        <th>联系方式</th>
+                        <th>更新操作</th>
+                        <th>删除操作</th>
+                        </thead>
+                        <tbody style="text-align: center" id="teacherbodyinfo">
+                        {% for everyuesr in allteacherinfo %}
+                        <tr>
+                            <td>{{everyuesr.uid}}</td>
+                            <td>{{everyuesr.name}}</td>
+                            <td>{{everyuesr.teacher_class_name}}</td>
+                            <td>{{everyuesr.permission}}</td>
+                            <td>{{everyuesr.contact}}</td>
+                            <td>
+                                <a href="#" id="updatatableinfotea" class="{{everyuesr.uid}}">更新</a>
+                            </td>
+                            <td>
+                                <a href="#" id="deletetableinfotea" class="{{everyuesr.uid}}">删除</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <div id="teacherinfopage" class="easyui-pagination"
+                         data-options="total:{{allteacherinfoNumber}},pageSize:10,pageList:[5,10,15,20,30],showRefresh:ture"
+                         style="background: #efefef;
+						border: 1px solid #ccc;">
+                    </div>
+                    <!--这里要运用分页功能来显示所有用户的信息-->
+                </div>
+                <div title="助教信息" id="showassistantinfo" class="showuserinfo" style="overflow:scroll;">
+                    <table id="assistantinfoshowtab" class="userinfoshowtab" >
+                        <thead style="text-align: center">
+                        <th>学号</th>
+                        <th>姓名</th>
+                        <th>班级</th>
+                        <th>权限</th>
+                        <th>联系方式</th>
+                        <th>更新操作</th>
+                        <th>删除操作</th>
+                        </thead>
+                        <tbody style="text-align: center" id="assistantbodyinfo">
+                        {% for everyuesr in allassistantinfo %}
+                        <tr>
+                            <td>{{everyuesr.uid}}</td>
+                            <td>{{everyuesr.name}}</td>
+                            <td>{{everyuesr.student_class_name}}</td>
+                            <td>{{everyuesr.permission}}</td>
+                            <td>{{everyuesr.contact}}</td>
+                            <td>
+                                <a href="#" id="updatatableinfoass" class="{{everyuesr.uid}}">更新</a>
+                            </td>
+                            <td>
+                                <a href="#" id="deletetableinfoass" class="{{everyuesr.uid}}">删除</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <div id="assistantinfopage" class="easyui-pagination"
+                         data-options="total:{{allassistantinfoNumber}},pageSize:10,pageList:[5,10,15,20,30],showRefresh:true"
+                         style="background: #efefef;
+						border: 1px solid #ccc;">
+                    </div>
+                </div>
+            </div>
+
+            <!--添加个单个添加信息的tabs模块，方便显示对应的内容-->
+            <div id = "tableeasyuiaddsigle" class="easyui-tabs functiontabsigle" data-options="plain:true,border:false,fit:true" style="width: 500px;height: 250px;">
+                <!--添加学生的功能-->
+                <div title="添加学生信息" id="addstudenttabsigle" class="addstudenttab" >
+                    <form action="#" method="post" enctype="multipart/form-data" style="text-align: center" id="siglestudentregester">
+                            {% csrf_token %}
+                            <input type="hidden" name="usertype" value="1">  <!--添加用户的权限-->
+                            <h1 style="font-size: 30px;color: red">学生必填信息</h1>
+                            <table style="margin:20px auto ;" class="formstudent">
+                                <tr>
+                                    <td>学号：</td>
+                                    <td><input id="usernumber"  name="usernumber" /></td>
+                                </tr>
+                                <tr>
+                                    <td>姓名：</td>
+                                    <td><input id="username"  name="usernumber" /></td>
+                                </tr>
+                                <tr>
+                                    <td>班级：</td>
+                                    <td><input id="userclass"  name="userclass" /></td>
+                                </tr>
+                            </table>
+                            <input type="button" value="注册"  style="font-size: 20px" id="regesterstu">
+                        </form>
+                </div>
+                 <!--添加老师的功能-->
+                <div title="添加老师信息" id="addteachertabsigle" class="addteachertab" >
+                    <form action="#" method="post" enctype="multipart/form-data" style="text-align: center" id="sigleteacherregester">
+                        {% csrf_token %}
+                        <input type="hidden" name="usertype" value="3">
+                        <h1 style="font-size: 30px;color: red">老师必填信息</h1>
+                            <table style="margin:20px auto ;" class="formstudent">
+                                <tr>
+                                    <td>工号：</td>
+                                    <td><input  id="usernumber3" name="usernumber" /></td>
+                                </tr>
+                                <tr>
+                                    <td>姓名：</td>
+                                    <td><input  id="username3" name="username" /></td>
+                                </tr>
+                                <tr>
+                                    <td>所带班级：</td>
+                                    <td><input id="userclass3"  name="userclass" /></td>
+                                </tr>
+                            </table>
+                            <input type="button" value="注册"  style="font-size: 20px" id="regestertea">
+                    </form>
+                </div>
+                <!--添加助教信息-->
+                 <div title="添加助教信息" id="addassistanttabsigle" class="addteachertab"  >
+                    <form action="#" method="post" enctype="multipart/form-data" style="text-align: center" id="sigleassistantregester">
+                        {% csrf_token %}
+                        <input type="hidden" name="usertype" value="2">
+                         <h1 style="font-size: 30px;color: red">助教必填信息</h1>
+                            <table style="margin:20px auto ;" class="formstudent">
+                                <tr>
+                                    <td>学号：</td>
+                                    <td><input   id="usernumber2" name="usernumber" /></td>
+                                </tr>
+                                <tr>
+                                    <td>姓名：</td>
+                                    <td><input  id ="username2" name="username" /></td>
+                                </tr>
+                                <tr>
+                                    <td>助教班级：</td>
+                                    <td><input  id="userclass2" name="userclass" /></td>
+                                </tr>
+                            </table>
+                            <input type="button" value="注册"  style="font-size: 20px" id="regesterass">
+                    </form>
+                </div>
+            </div>
+
+            <!--添加个批量添加信息的tabs模块，方便显示对应的内容-->
+            <div id = "tableeasyuiaddmore" class="easyui-tabs functiontabmore" data-options="plain:true,border:false,fit:true" style="width: 500px;height: 250px;">
+                <!--添加学生的功能-->
+                <div title="添加学生信息" id="addstudenttabmore" class="addstudenttabmore" >
+                    <form action="/systemmanagement/addinfomationuser/" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <lab>请选择要添加学生的文件(Excl)</lab><br>
+                        <input type="hidden" name="addusertype" value="1">
+                        <input type="file" name='picl'><br>
+                        <input type="submit" value="上传" name="submit">
+                    </form>
+                </div>
+                 <!--添加老师的功能-->
+                <div title="添加老师信息" id="addteachertabmore" class="addteachertabmore" >
+                    <form action="/systemmanagement/addinfomationuser/" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <lab>请选择要添加老师信息的文件(Excl)</lab><br>
+                        <input type="hidden" name="addusertype" value="3">
+                        <input type="file" name='picl'><br>
+                        <input type="submit" value="上传" name="submit">
+                    </form>
+                </div>
+                <!--添加助教的功能-->
+                <div title="添加助教信息" id="addassistanttabmore" class="addteachertabmore" >
+                    <form action="/systemmanagement/addinfomationuser/" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <lab>请选择要添加助教信息的文件(Excl)</lab><br>
+                        <input type="hidden" name="addusertype" value="2">
+                        <input type="file" name='picl'><br>
+                        <input type="submit" value="上传" name="submit">
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+<!--
+    <form action="/systemmanagement/addinfomationuser/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <lab>请选择要上传的文件</lab>
+        <input type="file"  name = 'picl'><br>
+        <input type="submit" value="上传" name="submit">
+    </form>
+ -->
+</body>
+</html>
